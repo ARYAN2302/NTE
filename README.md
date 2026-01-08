@@ -2,6 +2,8 @@
 
 NTE is a structured framework for reimagining classic, public-domain narratives in entirely new contexts (temporal, cultural, or technological) while preserving their original narrative integrity.
 
+**[Live Demo](https://nte-demo.streamlit.app/)**
+
 ![Architecture Diagram](assets/architecture.png)
 
 ## Overview

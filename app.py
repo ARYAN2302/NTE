@@ -6,8 +6,6 @@ from core import analyze_story, remap_context, generate_story, check_integrity
 st.set_page_config(page_title="NTE", layout="wide")
 
 st.title("Narrative Transposition Engine")
-st.caption("Reimagining stories using Gemini 1.5 Flash")
-
 with st.sidebar:
     st.header("Configuration")
     
