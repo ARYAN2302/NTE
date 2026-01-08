@@ -1,0 +1,24 @@
+You are a narrative analyst. Your task is to analyze the given story and extract its core components into a structured JSON format.
+
+Input story: [STORY_TEXT]
+
+Please extract:
+1. Theme: The main theme of the story (one sentence).
+2. Core Conflict: The central conflict (one sentence).
+3. Resolution: How the conflict is resolved (one sentence).
+4. Characters: A list of characters. For each, provide:
+   - name: The character's name.
+   - role: Narrative role (e.g., Protagonist, Antagonist).
+   - goal: Their primary motivation.
+   - flaw: A tragic flaw or weakness.
+   - end_state: How they end up (e.g., Dies, Succeeds).
+5. Plot Beats: A chronological list of key events (one sentence each).
+
+Output format:
+{
+  "theme": "...",
+  "core_conflict": "...",
+  "resolution": "...",
+  "characters": [ { "name": "...", "role": "...", "goal": "...", "flaw": "...", "end_state": "..." } ],
+  "plot_beats": [ "...", "..." ]
+}

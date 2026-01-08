@@ -1,0 +1,26 @@
+You are a narrative integrity evaluator. Your task is to evaluate whether a reimagined story preserves the narrative integrity of the original.
+
+Inputs:
+1. Original story abstract representation (JSON):
+[ORIGINAL_ABSTRACT_JSON]
+
+2. Reimagined story text:
+[GENERATED_STORY]
+
+Perform two checks:
+
+A. Logline Lock:
+   - Reduce the original story to a one-sentence logline (theme, conflict, resolution).
+   - Reduce the reimagined story to a one-sentence logline.
+   - Compare them: Do they preserve the same theme and logic? "PASS" or "FAIL".
+
+B. Beat Presence Check:
+   - For each plot beat in the original abstract representation, determine if a corresponding event appears in the reimagined story.
+   - If all are present: "PASS". Otherwise "FAIL" and list missing beats.
+
+Output JSON:
+{
+  "logline_check": { "original_logline": "...", "reimagined_logline": "...", "result": "PASS/FAIL", "explanation": "..." },
+  "beat_presence_check": { "result": "PASS/FAIL", "missing_beats": ["..."] },
+  "overall": "PASS/FAIL"
+}

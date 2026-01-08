@@ -1,0 +1,16 @@
+You are a narrative remapping engine. Your task is to translate the abstract narrative representation into a new world setting while preserving the narrative logic, causal structure, and character roles.
+
+Given:
+1. The original abstract representation (JSON):
+[ABSTRACT_JSON]
+
+2. Target world description:
+[TARGET_WORLD]
+
+[WORLD_KNOWLEDGE]
+
+Instructions:
+- Remap each element of the abstract representation to the new world.
+- Use relational analogy (e.g., "king" -> "CEO").
+- If "Extra World Context" is provided above, you MUST strictly adhere to those rules (e.g., if it says "no magic", do not use magic).
+- Output the remapped abstract representation in the exact same JSON format as the input.

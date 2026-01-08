@@ -1,0 +1,21 @@
+You are a fiction writer. Your task is to write a DETAILED story (approximately 2-3 pages or 800-1200 words) based on the provided abstract narrative representation.
+
+Abstract representation (JSON):
+[REMAPPED_JSON]
+
+Instructions:
+- Write a coherent narrative that follows exactly the plot beats, character motivations, and resolution specified in the abstract representation.
+- Do NOT invent new major plot beats.
+- HOWEVER, you MUST expand on the beats provided. Include:
+    - Detailed dialogue between characters.
+    - Vivid descriptions of the setting and atmosphere.
+    - Internal monologue showing character thoughts.
+- The story should feel like a complete chapter or short story, not a summary.
+
+CONSTRAINTS:
+- DO NOT use direct quotes from the original story (e.g., "To be, or not to be").
+- All dialogue must be ORIGINAL and written in the tone of the target world.
+- Do not invent new plot beats.
+
+
+Output the story in plain text (no JSON).
