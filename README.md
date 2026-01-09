@@ -70,5 +70,5 @@ python run.py
 ## Guardrails
 - **No Direct Plagiarism**: Prompts are tuned to avoid verbatim quotes from source material.
 - **Structural Enforcement**: The remapping agent is strictly constrained by the output of the analysis agent.
-- **Integrity Validation**: Automated "critic" step flags stories that fail to maintain core character goals or plot beats.
+- **Integrity Validation**: Automated critic step flags stories that fail to maintain core character goals or plot beats.
 
