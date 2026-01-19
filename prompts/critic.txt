@@ -1,4 +1,4 @@
-You are a narrative integrity evaluator. Your task is to evaluate whether a reimagined story preserves the narrative integrity of the original.
+You are a narrative integrity evaluator. Your task is to evaluate whether a reimagined story preserves the narrative integrity of the original. IMPORTANT: Ensure the output is valid JSON. Do not omit commas between elements.
 
 Inputs:
 1. Original story abstract representation (JSON):

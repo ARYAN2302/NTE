@@ -22,13 +22,32 @@ def parse_json(text):
     
     try:
         return json.loads(text)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as e:
+        # Try to find the JSON object if there's extra text
         start, end = text.find('{'), text.rfind('}')
         if start != -1 and end != -1:
-            return json.loads(text[start:end+1])
-        raise
+            try:
+                return json.loads(text[start:end+1])
+            except json.JSONDecodeError:
+                pass
+        
+        # Fix missing commas between elements in lists/objects
+        import re
+        repaired = text
+        # Look for things like: "key": "value"\n    "next_key"
+        # Only add a comma if the next character is a starting delimiter (", {, [) 
+        # but NOT an ending delimiter (}, ])
+        repaired = re.sub(r'("(?:\\["\\\/bfnrt]|[^\\"])*")\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
+        repaired = re.sub(r'([0-9]|true|false|null)\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
+        repaired = re.sub(r'(})\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
+        repaired = re.sub(r'(])\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
+        
+        try:
+            return json.loads(repaired)
+        except:
+            raise e
 
-def call_llm(system, prompt, temp=0.7, tokens=2000, json_mode=False):
+def call_llm(system, prompt, temp=0.7, tokens=4096, json_mode=False):
     config = {
         "temperature": temp,
         "max_output_tokens": tokens,

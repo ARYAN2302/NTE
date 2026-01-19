@@ -24,7 +24,7 @@ def analyze_story(text):
 def remap_context(abstract, world, knowledge=""):
     print("Remapping to target world...")
     template = _load_prompt("mapper.txt")
-    prompt = template.replace("[ABSTRACT_JSON]", json.dumps(abstract, indent=2))
+    prompt = template.replace("[ABSTRACT_JSON]", json.dumps(abstract))
     prompt = prompt.replace("[TARGET_WORLD]", world)
     
     ctx = f"\n\nEXTRA WORLD CONTEXT:\n{knowledge}" if knowledge else ""
@@ -55,7 +55,7 @@ def generate_story(remapped, feedback=None):
 def check_integrity(abstract, story):
     print("Checking integrity...")
     template = _load_prompt("critic.txt")
-    prompt = template.replace("[ORIGINAL_ABSTRACT_JSON]", json.dumps(abstract, indent=2))
+    prompt = template.replace("[ORIGINAL_ABSTRACT_JSON]", json.dumps(abstract))
     prompt = prompt.replace("[GENERATED_STORY]", story)
     
     res = call_llm(
