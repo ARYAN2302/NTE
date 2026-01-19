@@ -14,6 +14,9 @@ client = genai.Client(api_key=key)
 MODEL = "gemini-3-flash-preview"
 
 def parse_json(text):
+    if not text or not str(text).strip():
+        raise ValueError("Model returned an empty response. This can happen if safety filters are triggered or if the prompt is too complex.")
+        
     text = str(text).strip()
     if "```json" in text:
         text = text.split("```json")[1].split("```")[0].strip()
@@ -27,16 +30,14 @@ def parse_json(text):
         start, end = text.find('{'), text.rfind('}')
         if start != -1 and end != -1:
             try:
-                return json.loads(text[start:end+1])
+                candidate = text[start:end+1]
+                return json.loads(candidate)
             except json.JSONDecodeError:
                 pass
         
-        # Fix missing commas between elements in lists/objects
+        # Simple repair for common LLM mistakes (missing commas)
         import re
         repaired = text
-        # Look for things like: "key": "value"\n    "next_key"
-        # Only add a comma if the next character is a starting delimiter (", {, [) 
-        # but NOT an ending delimiter (}, ])
         repaired = re.sub(r'("(?:\\["\\\/bfnrt]|[^\\"])*")\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
         repaired = re.sub(r'([0-9]|true|false|null)\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
         repaired = re.sub(r'(})\s*\n\s*(?=[{\["])', r'\1,\n', repaired)
@@ -45,7 +46,7 @@ def parse_json(text):
         try:
             return json.loads(repaired)
         except:
-            raise e
+            raise ValueError(f"Failed to parse JSON: {e}\nRaw snippet: {text[:200]}...")
 
 def call_llm(system, prompt, temp=0.7, tokens=4096, json_mode=False):
     config = {
